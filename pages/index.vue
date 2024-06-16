@@ -23,8 +23,7 @@
 </template>
 
 <script setup lang="ts">
-const runtimeConfig = useRuntimeConfig();
-const mainImagePath = `https://raw.githubusercontent.com/${runtimeConfig.public.githubRepo}/main/images/main.webp`;
+const mainImagePath = `https://raw.githubusercontent.com/${process.env.GITHUB_REPOSITORY}/main/images/main.web`;
 
 // const data = await $fetch('https://api.github.com/repos/hybridx/my-moments/contents/images');
 // const items = data.reduce((acc, el) => {
