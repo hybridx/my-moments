@@ -1,6 +1,16 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
-  ssr: true,
-  modules: ["@nuxt/ui"]
-})
+  runtimeConfig: {
+    public: {
+      githubUsername: process.env.GITHUB_USER,
+      githubRepo: process.env.GITHUB_REPOSITORY,
+    }
+  },
+  routeRules: {
+    '/': { prerender: true },
+  },
+  nitro: {
+    preset: 'static',
+  },
+});

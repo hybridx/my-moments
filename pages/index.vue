@@ -1,11 +1,7 @@
 <template>
   <div class="container font-schibsted-grotesk-normal">
     <div class="main-image">
-      <img
-        id="root-image"
-        src="https://raw.githubusercontent.com/hybridx/my-moments/main/images/main.webp"
-        alt="Main"
-      />
+      <img id="root-image" :src="mainImagePath" alt="Couple" />
     </div>
     <h1>Anjita and Deepesh</h1>
 
@@ -26,20 +22,21 @@
 </template>
 
 <script setup lang="ts">
+const mainImagePath = `https://raw.githubusercontent.com/${$config.public.githubRepo}/main/images/main.web`;
+
 // const data = await $fetch('https://api.github.com/repos/hybridx/my-moments/contents/images');
-const data = await $fetch('http://localhost:1234/data');
-const items = data.reduce((acc, el) => {
-  if (!el.download_url) {
-    acc.push({
-      label: el.name.replace('-', ' '),
-      key: el.name,
-      content: el.path,
-    });
-  }
-  return acc;
-}, []);
-const images = await $fetch('http://localhost:1337/data');
-console.log(images);
+// const items = data.reduce((acc, el) => {
+//   if (!el.download_url) {
+//     acc.push({
+//       label: el.name.replace('-', ' '),
+//       key: el.name,
+//       content: el.path,
+//     });
+//   }
+//   return acc;
+// }, []);
+// const images = await $fetch('http://localhost:1337/data');
+// console.log(images);
 </script>
 
 <style lang="scss" scoped>
