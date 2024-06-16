@@ -8,6 +8,7 @@
     <div class="tabs">
       <div class="tab active">Engagement</div>
       <div class="tab">Pre Wedding</div>
+      <div v-for="t in test"> {{ t }}</div>
     </div>
 
     <div class="gallery">
@@ -24,6 +25,7 @@
 
 <script setup lang="ts">
 const mainImagePath = `https://raw.githubusercontent.com/${process.env.GITHUB_REPOSITORY}/main/images/main.webp`;
+const test = ['hello World', 'hello'];
 
 // const data = await $fetch('https://api.github.com/repos/hybridx/my-moments/contents/images');
 // const items = data.reduce((acc, el) => {
