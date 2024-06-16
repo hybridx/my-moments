@@ -23,8 +23,7 @@
 </template>
 
 <script setup lang="ts">
-const mainImagePath = `https://raw.githubusercontent.com/${process.env.GITHUB_REPOSITORY}/main/images/main.webp`;
-const test = ['hello World', 'hello'];
+const mainImagePath = `https://raw.githubusercontent.com/${import.meta.env.VITE_GITHUB_REPOSITORY}/main/images/main.webp`;
 
 // const data = await $fetch('https://api.github.com/repos/hybridx/my-moments/contents/images');
 
@@ -69,7 +68,6 @@ body {
   padding: 0;
 }
 .container {
-  /* max-width: 1200px; */
   width: auto;
   margin: 0 auto;
 }
