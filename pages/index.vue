@@ -8,7 +8,6 @@
     <div class="tabs">
       <div class="tab active">Engagement</div>
       <div class="tab">Pre Wedding</div>
-      <div v-for="t in test"> {{ t }}</div>
     </div>
 
     <div class="gallery">
@@ -28,6 +27,7 @@ const mainImagePath = `https://raw.githubusercontent.com/${process.env.GITHUB_RE
 const test = ['hello World', 'hello'];
 
 // const data = await $fetch('https://api.github.com/repos/hybridx/my-moments/contents/images');
+
 // const items = data.reduce((acc, el) => {
 //   if (!el.download_url) {
 //     acc.push({
