@@ -1,20 +1,20 @@
 {
-  "name": "nuxt-app",
+  "name": "my-moments",
   "private": true,
+  "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "build": "nuxt build",
-    "dev": "nuxt dev",
-    "generate": "nuxt generate",
-    "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
   "dependencies": {
-    "nuxt": "^3.12.1",
-    "vue": "^3.4.27",
-    "vue-router": "^4.3.3"
+    "dotenv": "^16.4.5",
+    "sass": "^1.77.5",
+    "vue": "^3.4.21"
   },
   "devDependencies": {
-    "sass": "^1.77.5"
+    "@vitejs/plugin-vue": "^5.0.4",
+    "vite": "^5.2.0"
   }
 }
