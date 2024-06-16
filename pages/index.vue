@@ -11,18 +11,19 @@
     </div>
 
     <div class="gallery">
-      <img
+      <!-- <img
         :src="image.download_url"
         width="350"
         v-for="image in images"
         alt="name"
-      />
+      /> -->
+      <h1>Test</h1>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-const mainImagePath = `https://raw.githubusercontent.com/${$config.public.githubRepo}/main/images/main.web`;
+const mainImagePath = `https://raw.githubusercontent.com/${process.env.GITHUB_REPOSITORY}/main/images/main.web`;
 
 // const data = await $fetch('https://api.github.com/repos/hybridx/my-moments/contents/images');
 // const items = data.reduce((acc, el) => {
