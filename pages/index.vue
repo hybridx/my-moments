@@ -8,30 +8,48 @@
       />
     </div>
     <h1>Anjita and Deepesh</h1>
-    <UTabs :items="items" />
-    <div class="image-gallery" id="image-gallery"></div>
+
+    <div class="tabs">
+      <div class="tab active">Engagement</div>
+      <div class="tab">Pre Wedding</div>
+    </div>
+
+    <div class="gallery">
+      <img
+        :src="image.download_url"
+        width="350"
+        v-for="image in images"
+        alt="name"
+      />
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
-
-const data = await $fetch('https://api.github.com/repos/hybridx/my-moments/contents/images');
-// const data = await $fetch('http://localhost:1234/data');
-console.log(data);
+// const data = await $fetch('https://api.github.com/repos/hybridx/my-moments/contents/images');
+const data = await $fetch('http://localhost:1234/data');
 const items = data.reduce((acc, el) => {
-    if (!el.download_url) {
-        acc.push({
-            label: el.name.replace('-', ' '),
-            key: el.name,
-            content: el.path,
-        })
-    }
-    return acc;
+  if (!el.download_url) {
+    acc.push({
+      label: el.name.replace('-', ' '),
+      key: el.name,
+      content: el.path,
+    });
+  }
+  return acc;
 }, []);
+const images = await $fetch('http://localhost:1337/data');
+console.log(images);
 </script>
 
 <style lang="scss" scoped>
 @import url('https://fonts.googleapis.com/css2?family=Cedarville+Cursive&display=swap');
+.gallery {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin: 2rem;
+}
 .font-noto-sans-normal {
   font-family: 'Noto Sans', sans-serif;
   font-optical-sizing: auto;
@@ -76,7 +94,6 @@ body {
   margin: 10px;
 }
 .tabs {
-  background: #fafafa;
   display: flex;
   margin-top: 24px;
   padding-top: 12px;
@@ -93,7 +110,7 @@ body {
   }
 }
 h1 {
-  font-family: "Cedarville Cursive", cursive;
+  font-family: 'Cedarville Cursive', cursive;
   font-size: 3rem;
   padding: 1rem;
   text-align: center;

@@ -1,6 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
-export default {
+export default defineNuxtConfig({
   devtools: { enabled: true },
-  modules: ['@nuxt/ui'],
-  target: 'static',
-};
+  ssr: true,
+  modules: ["@nuxt/ui"]
+})
