@@ -4,8 +4,9 @@ export default defineNuxtConfig({
   app: {
     baseURL: `/${process.env.GITHUB_REPOSITORY?.split('/')[1]}/`,
   },
+  ssr: true,
   routeRules: {
-    '/': { prerender: true },
+    '/': { prerender: true, experimentalNoScripts: true },
   },
   nitro: {
     preset: 'static',
