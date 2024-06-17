@@ -9,6 +9,5 @@ export async function fetchTabs() {
 
 export async function fetchImageUrls(url) {
   const { data } = await axiosConfigInstance.get(`${url}.json`);
-  console.log(data);
   return data;
 }
