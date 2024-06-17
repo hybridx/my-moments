@@ -3,13 +3,7 @@
     <!-- <img v-for="image in images" :src="image.download_url" alt="Couple" loading="lazy" /> -->
   </div>
   <div class="gallery" :id="props.name">
-    <a
-      :href="image.download_url"
-      target="_blank"
-      data-pswp-width="1669"
-      data-pswp-height="2500"
-      v-for="image in images"
-    >
+    <a :href="image.download_url" target="_blank" v-for="image in images">
       <img :src="image.download_url" alt="Couple" loading="lazy" width="340" />
     </a>
   </div>
@@ -17,6 +11,10 @@
 <script setup>
 import { ref } from 'vue';
 import { fetchImageUrls } from './../../service/api.js';
+
+const props = defineProps({
+  name: String,
+});
 
 // -----
 import PhotoSwipeLightbox from 'photoswipe/lightbox';
@@ -34,14 +32,11 @@ setTimeout(() => {
 }, 100);
 // ------
 
-const props = defineProps({
-  name: String,
-});
 const images = ref();
 images.value = await fetchImageUrls(props.name);
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 .gallery {
   display: flex;
   flex-wrap: wrap;
@@ -49,5 +44,8 @@ images.value = await fetchImageUrls(props.name);
   img {
     width: 350px;
   }
+}
+.pswp__img {
+  object-fit: contain;
 }
 </style>
