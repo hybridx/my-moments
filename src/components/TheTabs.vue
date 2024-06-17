@@ -1,7 +1,7 @@
 <template>
   <Suspense>
     <template #default>
-      <Tabs value="0">
+      <Tabs :value="tabs[0].name">
         <TabList>
           <Tab
             :value="tab.name"

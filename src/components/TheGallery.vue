@@ -1,6 +1,6 @@
 <template>
   <div class="gallery">
-    <img v-for="image in images" :src="image.download_url" alt="Couple" />
+    <img v-for="image in images" :src="image.download_url" alt="Couple" loading="lazy" />
   </div>
 </template>
 <script setup>
@@ -13,7 +13,6 @@ const props = defineProps({
 
 const images = ref();
 images.value = await fetchImageUrls(props.name);
-console.log(images.value);
 </script>
 <style scoped lang="scss">
 .gallery {
