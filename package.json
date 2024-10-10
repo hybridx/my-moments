@@ -17,7 +17,7 @@
     "@primevue/themes": "^4.0.0-rc.2",
     "axios": "^1.7.2",
     "dotenv": "^16.4.5",
-    "photoswipe": "^5.4.4",
+    "lightgallery": "^2.7.2",
     "primevue": "^4.0.0-rc.2",
     "sass": "^1.77.5",
     "vue": "^3.4.21"
