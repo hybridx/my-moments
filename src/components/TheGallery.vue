@@ -38,13 +38,18 @@ images.value = await fetchImageUrls(props.name);
 
 <style lang="scss">
 .gallery {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-gap: 1rem;
+
   img {
-    width: 350px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
   }
 }
+
 .pswp__img {
   object-fit: contain;
 }

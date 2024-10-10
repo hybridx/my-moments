@@ -2,13 +2,13 @@
   <div class="main-image">
     <img id="root-image" :src="mainImagePath" alt="Couple" />
   </div>
-  <h1>Anjita and Deepesh</h1>
+  <h1>You and Them</h1>
 </template>
 
 <script setup>
-const mainImagePath = `https://raw.githubusercontent.com/${
+const mainImagePath = import.meta.env.VITE_DEV_ENV === 'dev' ? `https://raw.githubusercontent.com/${
   import.meta.env.VITE_GITHUB_REPOSITORY
-}/main/images/main.jpg`;
+}/main/images/main.jpg` : 'main.jpg';
 </script>
 
 <style lang="scss">
@@ -16,9 +16,11 @@ const mainImagePath = `https://raw.githubusercontent.com/${
   width: 100%;
   display: flex;
   img {
-    width: 450px;
     margin: 0 auto;
     height: auto;
   }
+}
+#root-image {
+  max-width: 70vw;
 }
 </style>
