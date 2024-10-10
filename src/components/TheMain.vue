@@ -8,7 +8,7 @@
 <script setup>
 const mainImagePath = `https://raw.githubusercontent.com/${
   import.meta.env.VITE_GITHUB_REPOSITORY
-}/main/images/main.webp`;
+}/main/images/main.jpg`;
 </script>
 
 <style lang="scss">
