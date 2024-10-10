@@ -1,26 +1,29 @@
 <template>
   <div class="main-image">
-    <img id="root-image" :src="mainImagePath" alt="Couple" />
+    <img :src="mainImagePath" alt="Couple" />
   </div>
   <h1>You and Them</h1>
 </template>
 
 <script setup>
-const mainImagePath = import.meta.env.VITE_DEV_ENV === 'dev' ? `https://raw.githubusercontent.com/${
-  import.meta.env.VITE_GITHUB_REPOSITORY
-}/main/images/main.jpg` : 'main.jpg';
+const mainImagePath =
+  import.meta.env.VITE_DEV_ENV === 'dev'
+    ? `https://raw.githubusercontent.com/${
+        import.meta.env.VITE_GITHUB_REPOSITORY
+      }/main/images/main.jpg`
+    : 'main.jpg';
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .main-image {
   width: 100%;
-  display: flex;
+  display: grid;
+  place-content: center;
   img {
-    margin: 0 auto;
+    margin: auto;
     height: auto;
+    width: 95vw;
+    max-width: 1200px;
   }
-}
-#root-image {
-  max-width: 70vw;
 }
 </style>

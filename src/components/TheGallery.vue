@@ -1,103 +1,84 @@
-<script setup>
-import { ref } from 'vue';
-import { fetchImageUrls } from './../../service/api.js';
-
-const props = defineProps({
-  name: String,
-});
-
-// -----
-import PhotoSwipeLightbox from 'photoswipe/lightbox';
-import 'photoswipe/style.css';
-
-setTimeout(() => {
-  const lightbox = new PhotoSwipeLightbox({
-    gallery: `#${props.name}`,
-    children: 'a',
-    initialZoomLevel: 'fit',
-    pswpModule: () => import('photoswipe'),
-  });
-
-  lightbox.init();
-}, 100);
-// ------
-
-const images = ref();
-images.value = await fetchImageUrls(props.name);
-</script>
-
-<style lang="scss">
-.gallery {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  img {
-    width: 350px;
-  }
-}
-.pswp__img {
-  object-fit: contain;
-}
-</style>
-
 <template>
-  <lightgallery
-    :settings="{ speed: 500, plugins: plugins }"
-    :onInit="onInit"
-    :onBeforeSlide="onBeforeSlide"
-  >
-    <div class="gallery" :id="props.name">
-      <a
-        data-lg-size="1406-1390"
-        class="gallery-item"
-        :data-src="image.download_url"
-        :href="image.download_url"
-        target="_blank"
-        v-for="image in images"
-      >
-        <img
-          class="img-responsive"
-          :src="image.download_url"
-          alt="Couple"
-          loading="lazy"
-          width="340"
-        />
-      </a>
-    </div>
-  </lightgallery>
+  <div class="gallery" :id="props.name">
+    <a
+      v-for="(image, key) in images"
+      :key="key"
+      :href="image.download_url"
+      :data-pswp-width="image.width || 1200"
+      :data-pswp-height="image.height || 800"
+      target="_blank"
+      rel="noreferrer"
+    >
+      <img 
+        :src="image.download_url" 
+        alt="couple photo"
+        loading="lazy" 
+        width="340"
+      />
+    </a>
+  </div>
 </template>
 
-<script>
-import Lightgallery from 'lightgallery/vue';
-import lgZoom from 'lightgallery/plugins/zoom';
-import lgVideo from 'lightgallery/plugins/video';
+<script setup>
+import { ref, onMounted, onUnmounted } from 'vue'
+import { fetchImageUrls } from './../../service/api.js'
+import PhotoSwipeLightbox from 'photoswipe/lightbox'
+import 'photoswipe/style.css'
 
-export default {
-  name: 'App',
-  components: {
-    Lightgallery,
-  },
-  data: () => ({
-    plugins: [lgZoom, lgVideo],
-  }),
-  methods: {
-    onInit: () => {
-      console.log('lightGallery has been initialized');
-    },
-    onBeforeSlide: () => {
-      console.log('calling before slide');
-    },
-  },
-};
+const props = defineProps({
+  name: {
+    type: String,
+    required: true
+  }
+})
+
+const images = ref([])
+const lightbox = ref(null)
+
+onMounted(async () => {
+  try {
+    images.value = await fetchImageUrls(props.name)
+    
+    // Initialize PhotoSwipe after images are loaded
+    lightbox.value = new PhotoSwipeLightbox({
+      gallery: `#${props.name}`,
+      children: 'a',
+      initialZoomLevel: 'fit',
+      pswpModule: () => import('photoswipe')
+    })
+
+    // Small delay to ensure DOM is ready
+    setTimeout(() => {
+      lightbox.value.init()
+    }, 1000)
+  } catch (error) {
+    console.error('Error loading gallery:', error)
+  }
+})
+
+onUnmounted(() => {
+  if (lightbox.value) {
+    lightbox.value.destroy()
+    lightbox.value = null
+  }
+})
 </script>
-<style lang="css">
-@import url('https://cdn.jsdelivr.net/npm/lightgallery@2.0.0-beta.4/css/lightgallery.css');
-@import url('https://cdn.jsdelivr.net/npm/lightgallery@2.0.0-beta.4/css/lg-zoom.css');
-@import url('https://cdn.jsdelivr.net/npm/lightgallery@2.0.0-beta.4/css/lg-video.css');
-body {
-  margin: 0;
+
+<style lang="scss" scoped>
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-gap: 1rem;
+  
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+  }
 }
-.gallery-item {
-  margin: 5px;
+
+.pswp__img {
+  object-fit: contain;
 }
 </style>
