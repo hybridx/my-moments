@@ -23,8 +23,8 @@
     "vue": "^3.4.21"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^5.0.4",
-    "vite": "^5.2.0",
+    "@vitejs/plugin-vue": "^6.0.7",
+    "vite": "^8.1.0",
     "wireit": "^0.14.4"
   }
 }
